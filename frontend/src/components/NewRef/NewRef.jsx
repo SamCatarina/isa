@@ -8,7 +8,7 @@ import arrow from "../../assets/arrow.png";
 
 const QuestionFormRef = ({ turmaId }) => {
   const [references, setReferences] = useState([]);
-  const [tags, setTags] = useState([]); // Estado para as tags existentes
+  const [tags, setTags] = useState([]); 
   const [newReference, setNewReference] = useState({
     turmaId: turmaId,
     ref: "",
@@ -39,7 +39,7 @@ const QuestionFormRef = ({ turmaId }) => {
         "http://localhost:8800/professor/adicionarRef",
         newReference
       );
-      console.log("Data saved to database:", response.data);
+      console.log("Salvo no banco de dados:", response.data);
       setNewReference({
         turmaId: turmaId,
         ref: "",
@@ -48,7 +48,7 @@ const QuestionFormRef = ({ turmaId }) => {
       });
       toast.success("Referência adicionada!");
     } catch (error) {
-      console.error("Error saving data to database:", error);
+      console.error("Error ao salvar no banco de dados:", error);
     }
   };
 

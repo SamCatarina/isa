@@ -13,7 +13,6 @@ export const getTags = (req, res) => {
       return res.status(500).json(err);
     }
     const codigo = cod[0].codigo;
-    console.log("codigo: ", codigo);
 
     const query = `
       SELECT DISTINCT p.tag_1 AS tag FROM perguntas p
@@ -45,7 +44,6 @@ export const getTags = (req, res) => {
       }
 
       const uniqueTags = data.map(row => row.tag).filter(Boolean);
-      console.log(uniqueTags)
       return res.status(200).json(uniqueTags);
     });
   });

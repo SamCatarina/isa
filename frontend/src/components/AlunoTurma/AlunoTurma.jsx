@@ -44,7 +44,7 @@ function AlunoTurma() {
       );
 
       console.log("Resposta recebida:", response.data);
-      if (response.data.length !== 0) {
+      if (response.data.lista_respondida !== 0) {
         return handleSetFlagResposta(true);
       }
     } catch (error) {
