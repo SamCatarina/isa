@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon index.js",
-    "setup-db": "mysql -u root -p -e \"CREATE DATABASE IF NOT EXISTS questaoai;\" && mysql -u root -p questaoai < db/questaoai_dump.sql"
+    "setup-db-docker": "docker compose exec -T db mysql -u root isaData < ./isaDB/isaData.sql",
+    "setup-db": "mysql -u root -p -e \"CREATE DATABASE IF NOT EXISTS isaData;\" && mysql -u root -p isaData < ./isaDB/isaData.sql"
   },
   "keywords": [],
   "author": "",
