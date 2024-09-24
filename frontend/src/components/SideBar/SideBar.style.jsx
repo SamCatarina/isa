@@ -43,7 +43,7 @@ export const SideBarItems = styled.div`
     margin-top: 40px;
     color: #f53939;
     cursor: pointer;
-    padding-bottom: 50px;
+    margin-bottom: 50px;
     &:hover {
       border: 1px solid #f53939;
       border-left: none;

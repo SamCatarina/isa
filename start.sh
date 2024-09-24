@@ -9,7 +9,7 @@ cd ..
 echo "Instalando dependências do back-end..."
 cd backend
 npm install
-npm run setup-db
+npm run setup-db-docker
 npm run start &
 cd ..
 
