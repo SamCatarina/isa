@@ -1,9 +1,12 @@
 import express from "express";
 import userRoutes from "./routes/rotas.js";
 import cors from "cors";
+import dotenv from "dotenv";
 
+
+dotenv.config();
 const app = express();
-const port = 8800;
+const port = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());
