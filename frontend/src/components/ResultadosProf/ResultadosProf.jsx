@@ -68,9 +68,11 @@ function ResultadosProf({
   useEffect(() => {
     const fetchAlunos = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8800/turma/${turmaId}/ListarAlunos`
-        );
+        const response = await axios.get("http://localhost:8800/ListarAlunos", {
+          params: {
+            turmaId: turmaId,
+          },
+        });
         const alunosData = response.data["alunos"];
          ;
         const alunosMapping = alunosData.reduce((acc, aluno) => {

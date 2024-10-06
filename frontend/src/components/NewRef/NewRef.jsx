@@ -19,9 +19,11 @@ const QuestionFormRef = ({ turmaId }) => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8800/professor/turma/${turmaId}/tags`
-        );
+        const response = await axios.get(`http://localhost:8800/tags`, {
+          params: {
+            turmaId: turmaId,
+          },
+        });
         setTags(response.data);
         console.log("refs: ", response.data)
       } catch (error) {

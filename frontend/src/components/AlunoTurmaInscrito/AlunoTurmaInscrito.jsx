@@ -29,9 +29,11 @@ function AlunoTurmaInscrito(props) {
   useEffect(() => {
     const fetchListas = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8800/turma/${turma.id}/listas`
-        );
+        const response = await axios.get(`http://localhost:8800/listas`, {
+          params: {
+            turmaId: turmaId,
+          },
+        });
         setListas(response.data.listas.reverse());
       } catch (error) {
         console.error("Erro ao buscar listas da turma:", error);
@@ -122,5 +124,7 @@ function AlunoTurmaInscrito(props) {
     </Main>
   );
 }
+
+
 
 export default AlunoTurmaInscrito;

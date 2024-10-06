@@ -80,7 +80,7 @@ export const addQuestion = (req, res) => {
 
 
 export const getQuestions = (req, res) => {
-  const listaId = req.params.listaId;
+  const listaId = req.query.listaId;
   const q = `
         SELECT p.id, p.pergunta, p.alternativa_a, p.alternativa_b, p.alternativa_c, p.alternativa_d 
         FROM perguntas as p

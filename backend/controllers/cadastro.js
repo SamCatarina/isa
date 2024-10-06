@@ -15,6 +15,33 @@ function getRandomColor(colors) {
   return colors[randomIndex];
 }
 
+
+export const cadastro = async (req, res) => {
+  const { username, password, email, userType, userFormatPref, userTurno } =
+    req.body;
+
+  try {
+    if (userType === "aluno") {
+      await inserirAluno({
+        username,
+        password,
+        email,
+        userFormatPref,
+        userTurno,
+      });
+    } else if (userType === "professor") {
+      await inserirProfessor({ username, password, email });
+    }
+
+    res.status(200).json({ message: "Cadastro realizado com sucesso!" });
+  } catch (error) {
+    console.error("Erro ao realizar cadastro:", error.message);
+    res.status(400).json({ message: error.message });
+  }
+};
+
+
+
 export async function inserirAluno(dados) {
   var bgcolor = getRandomColor(colors);
   try {

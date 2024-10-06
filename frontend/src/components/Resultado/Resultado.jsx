@@ -55,7 +55,11 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
     const fetchAlunos = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/turma/${turmaId}/ListarAlunos`
+          "http://localhost:8800/ListarAlunos", {
+            params: {
+              turmaId:  turmaId,
+            }
+          }
         );
         const alunosData = response.data["alunos"];
         console.log(alunosData["alunos"]);

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -36,13 +37,20 @@ function Turma({
     const fetchData = async () => {
       try {
         const alunosResponse = await axios.get(
-          `http://localhost:8800/turma/${turma.id}/ListarAlunos`
+          "http://localhost:8800/ListarAlunos",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
         );
         setAlunos(alunosResponse.data.alunos);
 
-        const listasResponse = await axios.get(
-          `http://localhost:8800/turma/${turma.id}/listas`
-        );
+        const listasResponse = await axios.get(`http://localhost:8800/listas`, {
+          params: {
+            turmaId: turmaId,
+          },
+        });
         setListas(listasResponse.data.listas.reverse());
 
         const refsResponse = await axios.get(

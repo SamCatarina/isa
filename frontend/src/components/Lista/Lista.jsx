@@ -45,7 +45,11 @@ function Lista(props) {
     const listaId = props.lista.id;
 
     axios
-      .get(`http://localhost:8800/aluno/turma/lista/${listaId}`)
+      .get("http://localhost:8800/aluno/turma/lista", {
+        params: {
+          listaId:  listaId,
+        }
+      })
       .then((response) => {
         setQuestions(response.data);
       })
@@ -79,7 +83,12 @@ function Lista(props) {
         console.log("Respostas salvas com sucesso:", response.data);
 
         return axios.get(
-          `http://localhost:8800/aluno/turma/${alunoId}/lista/${listaId}/resultado`
+          "http://localhost:8800/aluno/turma/lista/resultado", {
+            params: {
+              alunoId: alunoId,
+              listaId: listaId,
+            }
+          }
         );
       })
       .then((response) => {
@@ -87,7 +96,7 @@ function Lista(props) {
         console.log(score);
 
         return axios.post(
-          `http://localhost:8800/aluno/turma/${alunoId}/lista/${listaId}/salvarTags`,
+          `http://localhost:8800/aluno/turma/lista/salvarTags`,
           {
             alunoId,
             listaId,

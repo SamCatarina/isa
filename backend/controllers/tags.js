@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 
 export const getTags = (req, res) => {
-  const turmaId = req.params.turmaId;
+  const turmaId = req.query.turmaId;
 
   const getCodigo = `
       SELECT tag FROM referencias
