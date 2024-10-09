@@ -34,8 +34,8 @@ const normalizeTag = (tag) => {
 };
 
 export const checkAnswers = (req, res) => {
-  const { listaId } = req.params;
-  const { alunoId } = req.params;
+  const listaId = req.query.listaId;
+  const alunoId = req.query.alunoId;
   let score = 0;
 
   const query = `

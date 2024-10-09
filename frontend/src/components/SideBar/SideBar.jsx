@@ -27,7 +27,12 @@ function SideBar(props) {
   const fetchTurmas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8800/turmas/${props.userId}/${props.userType}`
+        "http://localhost:8800/turmas", {
+          params: {
+            userId: props.userId,
+            userType:  props.userType,
+          }
+        }
       );
       setTurmas(response.data.turmas);
       console.log(response.data.turmas)
