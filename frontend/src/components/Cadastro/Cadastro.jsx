@@ -23,7 +23,7 @@ function Cadastro() {
     userTurno: "Manhã",
   });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,8 @@ function Cadastro() {
 
   useEffect(() => {
     const checkButtonControl = () => {
-      const { username, password, email, userType, userFormatPref, userTurno } = formData;
+      const { username, password, email, userType, userFormatPref, userTurno } =
+        formData;
       if (username && password && email && userType) {
         if (userType === "aluno") {
           setButtonControl(userFormatPref && userTurno);
@@ -59,7 +60,7 @@ function Cadastro() {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8800/cadastro",
+        import.meta.env.VITE_API_URL + "/cadastro",
         formData
       );
       console.log("Cadastro realizado com sucesso:", response.data);
@@ -67,7 +68,10 @@ function Cadastro() {
       setErrorMessage("");
     } catch (error) {
       console.error("Erro ao realizar cadastro:", error);
-      setErrorMessage("Erro ao realizar cadastro: " + (error.response?.data?.message || error.message));
+      setErrorMessage(
+        "Erro ao realizar cadastro: " +
+          (error.response?.data?.message || error.message)
+      );
     }
   };
 
@@ -150,11 +154,12 @@ function Cadastro() {
               </FormGroup>
             </>
           )}
-          <SubmitButton type="submit" disabled={!buttonControl}>Cadastrar</SubmitButton>
+          <SubmitButton type="submit" disabled={!buttonControl}>
+            Cadastrar
+          </SubmitButton>
         </CadastroForm>
 
         {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-
       </CadastroItems>
 
       {showSuccessModal && (

@@ -30,7 +30,7 @@ export const saveRef = (req, res) => {
 
 
 export const getReferences = (req, res) => {
-  const turmaId = req.params.turmaId;
+  const turmaId = req.query.turmaId;
 
   const q = `
         SELECT id, ref, tag, formato 

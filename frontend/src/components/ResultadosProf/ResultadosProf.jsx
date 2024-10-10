@@ -48,16 +48,14 @@ function ResultadosProf({
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-     ;
     axios
-      .get(`http://localhost:8800/grupos/chamada`, {
+      .get(import.meta.env.VITE_API_URL + "/grupos/chamada", {
         params: {
           turmaId,
           listaId,
         },
       })
       .then((response) => {
-         ;
         setChamada(response.data.exists);
       })
       .catch((error) => {
@@ -68,16 +66,17 @@ function ResultadosProf({
   useEffect(() => {
     const fetchAlunos = async () => {
       try {
-        const response = await axios.get("http://localhost:8800/ListarAlunos", {
-          params: {
-            turmaId: turmaId,
-          },
-        });
+        const response = await axios.get(
+          import.meta.env.VITE_API_URL + "/ListarAlunos",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
+        );
         const alunosData = response.data["alunos"];
-         ;
         const alunosMapping = alunosData.reduce((acc, aluno) => {
           acc[aluno.id] = aluno.nome;
-           ;
           return acc;
         }, {});
         setAlunosMap(alunosMapping);
@@ -92,14 +91,13 @@ function ResultadosProf({
   useEffect(() => {
     if (chamada) {
       axios
-        .get("http://localhost:8800/grupos/getGrupos", {
+        .get(import.meta.env.VITE_API_URL + "/grupos/getGrupos", {
           params: {
             turmaId,
             listaId,
           },
         })
         .then((response) => {
-           ;
           const data = response.data;
           const groupedData = data.reduce((acc, item) => {
             const { grupo_id, aluno_id } = item;
@@ -125,11 +123,10 @@ function ResultadosProf({
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8800/aluno/turma/resultado/verificar`, {
+      .get(import.meta.env.VITE_API_URL + "/aluno/turma/resultado/verificar", {
         params: { listaId },
       })
       .then((response) => {
-         ;
         setDadosJson(response.data.results);
 
         const results = response.data.results;
@@ -173,9 +170,6 @@ function ResultadosProf({
       });
   }, [listaId]);
 
-   ;
-   ;
-
   const gerarGrupos = async () => {
     setLoading(true);
 
@@ -196,25 +190,30 @@ function ResultadosProf({
 
           alunos.forEach((aluno) => {
             salvarGruposPromises.push(
-              axios.post(`http://localhost:8800/professor/salvarGrupos`, {
-                alunoId: aluno.aluno_id,
-                turmaId,
-                listaId,
-                grupoId,
-              })
+              axios.post(
+                import.meta.env.VITE_API_URL + "/professor/salvarGrupos",
+                {
+                  alunoId: aluno.aluno_id,
+                  turmaId,
+                  listaId,
+                  grupoId,
+                }
+              )
             );
           });
         });
 
         await Promise.all(salvarGruposPromises);
 
-        await axios.post(`http://localhost:8800/professor/salvarGrupos/api`, {
-          acao_chamada: true,
-          turmaId,
-          listaId,
-        });
+        await axios.post(
+          import.meta.env.VITE_API_URL + "/professor/salvarGrupos/api",
+          {
+            acao_chamada: true,
+            turmaId,
+            listaId,
+          }
+        );
 
-         ;
         setLoading(false);
         setChamada(true);
       } catch (error) {
@@ -222,7 +221,6 @@ function ResultadosProf({
         setLoading(false);
       }
     } else {
-       ;
       setLoading(false);
     }
   };

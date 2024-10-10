@@ -23,17 +23,17 @@ function AlunoTurmaInscrito(props) {
   const [selectedRef, setSelectedRef] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  console.log("USER: ", user);
-  console.log("TURMA: ", turma);
-
   useEffect(() => {
     const fetchListas = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/listas`, {
-          params: {
-            turmaId: turmaId,
-          },
-        });
+        const response = await axios.get(
+          import.meta.env.VITE_API_URL + "/listas",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
+        );
         setListas(response.data.listas.reverse());
       } catch (error) {
         console.error("Erro ao buscar listas da turma:", error);
@@ -43,7 +43,12 @@ function AlunoTurmaInscrito(props) {
     const fetchRefs = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/aluno/turma/turmaRef/${turmaId}`
+          import.meta.env.VITE_API_URL + "/aluno/turma/turmaRef",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
         );
         setRefs(response.data.reverse());
         console.log(response.data);
@@ -124,7 +129,5 @@ function AlunoTurmaInscrito(props) {
     </Main>
   );
 }
-
-
 
 export default AlunoTurmaInscrito;

@@ -4,7 +4,6 @@ import axios from "axios";
 import SideBar from "../SideBar/SideBar";
 import Resultado from "../Resultado/Resultado";
 import Header from "../Header/Header";
-import Turma from "../Turma/Turma";
 import Lista from "../Lista/Lista";
 import AlunoTurmaInscrito from "../AlunoTurmaInscrito/AlunoTurmaInscrito";
 import { Contents } from "./AlunoTurma.style";
@@ -34,7 +33,7 @@ function AlunoTurma() {
 
     try {
       const response = await axios.get(
-        `http://localhost:8800/aluno/turma/resultado/verificarAluno`,
+        import.meta.env.VITE_API_URL + "/aluno/turma/resultado/verificarAluno",
         {
           params: {
             listaId: lista.id,

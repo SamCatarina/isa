@@ -34,9 +34,8 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
   const [alunosMap, setAlunosMap] = useState({});
 
   useEffect(() => {
-    console.log("listaaaaaaaaaaaaaaaa ", lista);
     axios
-      .get(`http://localhost:8800/grupos/chamada`, {
+      .get(import.meta.env.VITE_API_URL + "/grupos/chamada", {
         params: {
           turmaId,
           listaId,
@@ -55,10 +54,11 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
     const fetchAlunos = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8800/ListarAlunos", {
+          import.meta.env.VITE_API_URL + "/ListarAlunos",
+          {
             params: {
-              turmaId:  turmaId,
-            }
+              turmaId: turmaId,
+            },
           }
         );
         const alunosData = response.data["alunos"];
@@ -80,7 +80,7 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
   useEffect(() => {
     if (chamada) {
       axios
-        .get("http://localhost:8800/grupos/getGrupos", {
+        .get(import.meta.env.VITE_API_URL + "/grupos/getGrupos", {
           params: {
             turmaId,
             listaId,
@@ -113,12 +113,15 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8800/aluno/turma/resultado/verificarAluno`, {
-        params: {
-          listaId: lista.id,
-          alunoId: aluno.id,
-        },
-      })
+      .get(
+        import.meta.env.VITE_API_URL + "/aluno/turma/resultado/verificarAluno",
+        {
+          params: {
+            listaId: lista.id,
+            alunoId: aluno.id,
+          },
+        }
+      )
       .then((response) => {
         setQntPer(response.data.total_perguntas);
         console.log("aluno", response.data);
@@ -140,7 +143,11 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
     if (topTags.length === 0 || !formato) return;
 
     axios
-      .get(`http://localhost:8800/aluno/turma/turmaRef/${turmaId}`)
+      .get(import.meta.env.VITE_API_URL + "/aluno/turma/turmaRef", {
+        params: {
+          turmaId: turmaId,
+        },
+      })
       .then((response) => {
         console.log("resssss", response.data);
         setMateriais(response.data);
