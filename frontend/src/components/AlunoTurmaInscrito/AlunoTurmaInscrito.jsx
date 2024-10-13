@@ -51,7 +51,6 @@ function AlunoTurmaInscrito(props) {
           }
         );
         setRefs(response.data.reverse());
-        console.log(response.data);
       } catch (error) {
         console.error("Erro ao buscar refs da turma:", error);
       }

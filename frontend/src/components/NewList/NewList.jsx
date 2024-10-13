@@ -49,7 +49,6 @@ const QuestionForm = ({
           }
         );
         setTags(response.data);
-        console.log("refs: ", response.data);
       } catch (error) {
         console.error("Erro ao buscar tags:", error);
       }
@@ -108,7 +107,6 @@ const QuestionForm = ({
         import.meta.env.VITE_API_URL + "/professor/turma/novalista",
         { newList, questions, turmaId }
       );
-      console.log("Data saved to database:", response.data);
 
       setList([]);
       setQuestions([]);
@@ -295,7 +293,6 @@ const QuestionForm = ({
 };
 
 function NewList({ turma, handleSetFlagTurma }) {
-  console.log(turma);
 
   return (
     <Main>

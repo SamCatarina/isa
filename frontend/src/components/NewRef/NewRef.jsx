@@ -28,7 +28,6 @@ const QuestionFormRef = ({ turmaId }) => {
           }
         );
         setTags(response.data);
-        console.log("refs: ", response.data);
       } catch (error) {
         console.error("Erro ao buscar tags:", error);
       }
@@ -45,7 +44,6 @@ const QuestionFormRef = ({ turmaId }) => {
         import.meta.env.VITE_API_URL + "/professor/adicionarRef",
         newReference
       );
-      console.log("Data saved to database:", response.data);
       setNewReference({
         turmaId: turmaId,
         ref: "",

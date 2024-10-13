@@ -63,7 +63,6 @@ function Cadastro() {
         import.meta.env.VITE_API_URL + "/cadastro",
         formData
       );
-      console.log("Cadastro realizado com sucesso:", response.data);
       setShowSuccessModal(true);
       setErrorMessage("");
     } catch (error) {

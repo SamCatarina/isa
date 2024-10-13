@@ -34,10 +34,8 @@ function Login() {
         import.meta.env.VITE_API_URL + "/login",
         formData
       );
-      console.log("Login realizado com sucesso:", response.data);
 
       if (response.data.user.userType == "aluno") {
-        console.log(response.data.user);
         navigate("/aluno/turma", { state: { user: response.data.user } });
       } else if (response.data.user.userType == "professor") {
         navigate("/professor", { state: { user: response.data.user } });

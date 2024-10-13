@@ -65,13 +65,11 @@ function Lista(props) {
     const listaId = props.lista.id;
     const alunoTurno = props.aluno.turno;
     const formato = props.aluno.formato;
-    console.log(props.aluno);
     const respostas = Object.keys(responses).map((perguntaId) => ({
       perguntaId: Number(perguntaId),
       respostaAluno: responses[perguntaId],
     }));
 
-    console.log("Enviando respostas:", { alunoId, listaId, respostas });
 
     axios
       .post(import.meta.env.VITE_API_URL + "/aluno/turma/resultado", {
@@ -80,7 +78,6 @@ function Lista(props) {
         respostas,
       })
       .then((response) => {
-        console.log("Respostas salvas com sucesso:", response.data);
 
         return axios.get(
           import.meta.env.VITE_API_URL + "/aluno/turma/lista/resultado",
@@ -110,7 +107,6 @@ function Lista(props) {
         );
       })
       .then((postResponse) => {
-        console.log("Tags salvas com sucesso:", postResponse.data);
         return props.handleSetFlagResposta(true, respostas);
       })
       .catch((error) => {

@@ -22,7 +22,6 @@ function SideBar(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [turmas, setTurmas] = useState([]);
   const navigate = useNavigate();
-  console.log(props);
 
   const fetchTurmas = async () => {
     try {
@@ -36,7 +35,6 @@ function SideBar(props) {
         }
       );
       setTurmas(response.data.turmas);
-      console.log(response.data.turmas);
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
     }

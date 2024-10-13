@@ -42,7 +42,6 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
         },
       })
       .then((response) => {
-        console.log("CHAMADA: ", response.data.exists);
         setChamada(response.data.exists);
       })
       .catch((error) => {
@@ -62,7 +61,6 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
           }
         );
         const alunosData = response.data["alunos"];
-        console.log(alunosData["alunos"]);
         const alunosMapping = alunosData.reduce((acc, aluno) => {
           acc[aluno.id] = aluno.nome;
           console.log(aluno.nome);
@@ -87,7 +85,6 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
           },
         })
         .then((response) => {
-          console.log("grupos:", response.data);
           const data = response.data;
           const groupedData = data.reduce((acc, item) => {
             const { grupo_id, aluno_id } = item;
@@ -124,13 +121,11 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
       )
       .then((response) => {
         setQntPer(response.data.total_perguntas);
-        console.log("aluno", response.data);
         setScore(response.data.results[0]["score"]);
         setFormato(response.data.results[0]["formato"]);
         const tagsString = response.data.results[0]["tags"];
 
         const tagsArray = tagsString.split(",").map((tag) => tag.trim());
-        console.log(tagsArray);
 
         setTopTags(tagsArray);
       })
@@ -149,7 +144,6 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
         },
       })
       .then((response) => {
-        console.log("resssss", response.data);
         setMateriais(response.data);
 
         let allFormats = [];
@@ -159,27 +153,21 @@ function Resultado({ lista, aluno, handleSetFlagTurma, turma }) {
           const tagsDisc = material.tag;
           const tagsFormt = material.formato;
 
-          console.log("Processing Material:", material, topTags);
 
           if (topTags.includes(tagsDisc)) {
             if (tagsFormt === formato) {
               oneFormat.push(material.ref);
-              console.log("Added to oneFormat:", material.ref);
             } else {
               allFormats.push(material.ref);
-              console.log("Added to allFormats:", material.ref);
             }
           }
         });
 
-        console.log("All Formats:", allFormats);
-        console.log("One Format:", oneFormat);
 
         allFormats.sort(() => Math.random() - 0.5);
         const materiaisRelevantes = oneFormat.concat(allFormats).slice(0, 30);
         setMatRelev(materiaisRelevantes);
 
-        console.log("Materiais Relevantes:", materiaisRelevantes);
       })
       .catch((error) => console.log(error));
   }, [topTags, formato, listaId]);

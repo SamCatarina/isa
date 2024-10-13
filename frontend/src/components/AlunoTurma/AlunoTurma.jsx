@@ -12,7 +12,6 @@ import { Main } from "../Turma/Turma.style";
 function AlunoTurma() {
   const location = useLocation();
   const user = location.state?.user;
-  console.log("USEEERRRRR", user);
   const [flagTurma, setFlagTurma] = useState(false);
   const [flagLista, setFlagLista] = useState(false);
   const [flagResposta, setFlagResposta] = useState(false);
@@ -42,7 +41,6 @@ function AlunoTurma() {
         }
       );
 
-      console.log("Resposta recebida:", response.data);
       if (response.data.results.length !== 0) {
         return handleSetFlagResposta(true);
       }
