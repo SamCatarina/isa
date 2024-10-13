@@ -176,7 +176,7 @@ function ResultadosProf({
     if (dadosJson) {
       try {
         const response = await axios.post(
-          "http://127.0.0.1:5000/ga_python",
+          import.meta.env.VITE_PYTHON_API_URL + "/ga_python",
           dadosJson
         );
         const gruposData = Object.entries(response.data).map(([id, items]) => ({
