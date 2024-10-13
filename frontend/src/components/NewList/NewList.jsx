@@ -41,14 +41,14 @@ const QuestionForm = ({
     const fetchTags = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/tags`, {
+          import.meta.env.VITE_API_URL + "/tags",
+          {
             params: {
               turmaId: turmaId,
-            }
+            },
           }
         );
         setTags(response.data);
-        console.log("refs: ", response.data);
       } catch (error) {
         console.error("Erro ao buscar tags:", error);
       }
@@ -104,10 +104,9 @@ const QuestionForm = ({
 
     try {
       const response = axios.post(
-        "http://localhost:8800/professor/turma/novalista",
+        import.meta.env.VITE_API_URL + "/professor/turma/novalista",
         { newList, questions, turmaId }
       );
-      console.log("Data saved to database:", response.data);
 
       setList([]);
       setQuestions([]);
@@ -294,7 +293,6 @@ const QuestionForm = ({
 };
 
 function NewList({ turma, handleSetFlagTurma }) {
-  console.log(turma);
 
   return (
     <Main>

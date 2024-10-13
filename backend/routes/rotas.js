@@ -22,7 +22,7 @@ router.post("/professor/salvarGrupos/api", salvarChamada)
 router.get("/grupos/chamada", getChamada)
 router.post("/professor/adicionarRef", saveRef);
 router.get("/aluno/turma/lista", getQuestions);
-router.get("/aluno/turma/turmaRef/:turmaId", getReferences);
+router.get("/aluno/turma/turmaRef", getReferences);
 router.post("/aluno/turma/resultado", saveAnswers);
 router.get("/aluno/turma/resultado/verificar", checkIfExists);
 router.get("/aluno/turma/resultado/verificarAluno", checkIfExistsAluno);

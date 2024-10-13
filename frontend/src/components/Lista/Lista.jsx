@@ -45,10 +45,10 @@ function Lista(props) {
     const listaId = props.lista.id;
 
     axios
-      .get("http://localhost:8800/aluno/turma/lista", {
+      .get(import.meta.env.VITE_API_URL + "/aluno/turma/lista", {
         params: {
-          listaId:  listaId,
-        }
+          listaId: listaId,
+        },
       })
       .then((response) => {
         setQuestions(response.data);
@@ -65,29 +65,27 @@ function Lista(props) {
     const listaId = props.lista.id;
     const alunoTurno = props.aluno.turno;
     const formato = props.aluno.formato;
-    console.log(props.aluno);
     const respostas = Object.keys(responses).map((perguntaId) => ({
       perguntaId: Number(perguntaId),
       respostaAluno: responses[perguntaId],
     }));
 
-    console.log("Enviando respostas:", { alunoId, listaId, respostas });
 
     axios
-      .post("http://localhost:8800/aluno/turma/resultado", {
+      .post(import.meta.env.VITE_API_URL + "/aluno/turma/resultado", {
         alunoId,
         listaId,
         respostas,
       })
       .then((response) => {
-        console.log("Respostas salvas com sucesso:", response.data);
 
         return axios.get(
-          "http://localhost:8800/aluno/turma/lista/resultado", {
+          import.meta.env.VITE_API_URL + "/aluno/turma/lista/resultado",
+          {
             params: {
               alunoId: alunoId,
               listaId: listaId,
-            }
+            },
           }
         );
       })
@@ -96,7 +94,7 @@ function Lista(props) {
         console.log(score);
 
         return axios.post(
-          `http://localhost:8800/aluno/turma/lista/salvarTags`,
+          import.meta.env.VITE_API_URL + "/aluno/turma/lista/salvarTags",
           {
             alunoId,
             listaId,
@@ -109,7 +107,6 @@ function Lista(props) {
         );
       })
       .then((postResponse) => {
-        console.log("Tags salvas com sucesso:", postResponse.data);
         return props.handleSetFlagResposta(true, respostas);
       })
       .catch((error) => {

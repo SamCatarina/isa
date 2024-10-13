@@ -24,7 +24,7 @@ function Turma({
   handleSetFlagNovaLista,
   handleSetFlagLista,
   handleSetFlagNovaRef,
-  render
+  render,
 }) {
   const [alunos, setAlunos] = useState([]);
   const [listas, setListas] = useState([]);
@@ -37,7 +37,7 @@ function Turma({
     const fetchData = async () => {
       try {
         const alunosResponse = await axios.get(
-          "http://localhost:8800/ListarAlunos",
+          import.meta.env.VITE_API_URL + "/ListarAlunos",
           {
             params: {
               turmaId: turmaId,
@@ -46,15 +46,23 @@ function Turma({
         );
         setAlunos(alunosResponse.data.alunos);
 
-        const listasResponse = await axios.get(`http://localhost:8800/listas`, {
-          params: {
-            turmaId: turmaId,
-          },
-        });
+        const listasResponse = await axios.get(
+          import.meta.env.VITE_API_URL + "/listas",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
+        );
         setListas(listasResponse.data.listas.reverse());
 
         const refsResponse = await axios.get(
-          `http://localhost:8800/aluno/turma/turmaRef/${turma.id}`
+          import.meta.env.VITE_API_URL + "/aluno/turma/turmaRef",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
         );
         setRefs(refsResponse.data.reverse());
       } catch (error) {
@@ -66,7 +74,6 @@ function Turma({
       fetchData();
     }
   }, [turma, render]);
-
 
   const openModal = (refData) => {
     setSelectedRef(refData);
