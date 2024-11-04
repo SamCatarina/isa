@@ -9,14 +9,19 @@ cd ..
 echo "Instalando dependências do back-end..."
 cd backend
 npm install
-npm run setup-db
+npm run setup-db-docker
 npm run start &
 cd ..
 
 echo "Instalando dependências da API..."
-cd backend/api
+
+cd backend/api/env
+
+source env/bin/activate 
+
 pip install pandas
 pip install Flask Flask-CORS
+
 python3 GA_SBIE_API.py &
 cd ..
 
