@@ -22,15 +22,19 @@ function SideBar(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [turmas, setTurmas] = useState([]);
   const navigate = useNavigate();
-  console.log(props);
 
   const fetchTurmas = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8800/turmas/${props.userId}/${props.userType}`
+        import.meta.env.VITE_API_URL + "/turmas",
+        {
+          params: {
+            userId: props.userId,
+            userType: props.userType,
+          },
+        }
       );
       setTurmas(response.data.turmas);
-      console.log(response.data.turmas)
     } catch (error) {
       console.error("Erro ao buscar turmas:", error);
     }
@@ -61,7 +65,7 @@ function SideBar(props) {
 
   const handleParticiparSubmit = async () => {
     try {
-      await axios.post("http://localhost:8800/participar-turma", {
+      await axios.post(import.meta.env.VITE_API_URL + "/participar-turma", {
         userId: props.userId,
         turmaCode,
       });
@@ -76,7 +80,7 @@ function SideBar(props) {
   const handleCreateTurma = async () => {
     if (turmaName != "") {
       try {
-        await axios.post("http://localhost:8800/turmas/criar-turma", {
+        await axios.post(import.meta.env.VITE_API_URL + "/turmas/criar-turma", {
           professorId: props.userId,
           turmaName,
         });

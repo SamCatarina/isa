@@ -5,11 +5,11 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - questaoai:/var/lib/mysql
+      - isaData:/var/lib/mysql
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
 
 volumes:
-  questaoai:
+  isaData:
     driver: local
 

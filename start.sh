@@ -3,7 +3,7 @@
 echo "Instalando dependências do front-end..."
 cd frontend
 npm install
-npm run dev &
+npm start &
 cd ..
 
 echo "Instalando dependências do back-end..."

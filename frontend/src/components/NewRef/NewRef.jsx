@@ -20,10 +20,14 @@ const QuestionFormRef = ({ turmaId }) => {
     const fetchTags = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8800/professor/turma/${turmaId}/tags`
+          import.meta.env.VITE_API_URL + "/tags",
+          {
+            params: {
+              turmaId: turmaId,
+            },
+          }
         );
         setTags(response.data);
-        console.log("refs: ", response.data)
       } catch (error) {
         console.error("Erro ao buscar tags:", error);
       }
@@ -37,10 +41,9 @@ const QuestionFormRef = ({ turmaId }) => {
       setReferences([...references, newReference]);
 
       const response = await axios.post(
-        "http://localhost:8800/professor/adicionarRef",
+        import.meta.env.VITE_API_URL + "/professor/adicionarRef",
         newReference
       );
-      console.log("Data saved to database:", response.data);
       setNewReference({
         turmaId: turmaId,
         ref: "",

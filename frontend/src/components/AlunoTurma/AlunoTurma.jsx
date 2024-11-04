@@ -4,7 +4,6 @@ import axios from "axios";
 import SideBar from "../SideBar/SideBar";
 import Resultado from "../Resultado/Resultado";
 import Header from "../Header/Header";
-import Turma from "../Turma/Turma";
 import Lista from "../Lista/Lista";
 import AlunoTurmaInscrito from "../AlunoTurmaInscrito/AlunoTurmaInscrito";
 import { Contents } from "./AlunoTurma.style";
@@ -13,7 +12,6 @@ import { Main } from "../Turma/Turma.style";
 function AlunoTurma() {
   const location = useLocation();
   const user = location.state?.user;
-  console.log("USEEERRRRR", user);
   const [flagTurma, setFlagTurma] = useState(false);
   const [flagLista, setFlagLista] = useState(false);
   const [flagResposta, setFlagResposta] = useState(false);
@@ -34,7 +32,7 @@ function AlunoTurma() {
 
     try {
       const response = await axios.get(
-        `http://localhost:8800/aluno/turma/resultado/verificarAluno`,
+        import.meta.env.VITE_API_URL + "/aluno/turma/resultado/verificarAluno",
         {
           params: {
             listaId: lista.id,
@@ -43,7 +41,6 @@ function AlunoTurma() {
         }
       );
 
-      console.log("Resposta recebida:", response.data);
       if (response.data.results.length !== 0) {
         return handleSetFlagResposta(true);
       }
